@@ -8,12 +8,15 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rgbd2d;
     Vector3 movementVector;
-    // [SerializeField] float speed=3f;
+    [SerializeField] float speed=3f;
+
+    Animate animate;
 
     private void Awake()
     {
         rgbd2d=GetComponent<Rigidbody2D>();
         movementVector=new Vector3();
+        animate=GetComponent<Animate>();
 
     }
 
@@ -23,7 +26,9 @@ public class PlayerMovement : MonoBehaviour
         movementVector.x=Input.GetAxisRaw("Horizontal");
         movementVector.y=Input.GetAxisRaw("Vertical");
 
-        // movementVector *=speed;
+        animate.horizontal=movementVector.x;
+
+        movementVector *=speed;
 
         rgbd2d.velocity=movementVector;
 
